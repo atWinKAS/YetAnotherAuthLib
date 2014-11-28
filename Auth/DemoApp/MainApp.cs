@@ -6,8 +6,22 @@ using System.Threading.Tasks;
 
 namespace DemoApp
 {
+    using System.Threading;
+
     public class MainApp
     {
+        public void ShowInfo()
+        {
+            Console.WriteLine("-= Current user info =-");
+
+            var p = Thread.CurrentPrincipal;
+            Console.WriteLine("Is Authenticated: {0}",  p.Identity.IsAuthenticated);
+            Console.WriteLine("User name: {0}", p.Identity.Name);
+            Console.WriteLine("Is Admin: {0}", p.IsInRole("admin"));
+
+            Console.WriteLine("-=====================-");
+        }
+
         public void AllCanDoThis()
         {
             Console.WriteLine(Environment.NewLine);

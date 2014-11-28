@@ -8,6 +8,10 @@ namespace Auth
 {
     using System.ComponentModel.DataAnnotations;
     using System.Security;
+    using System.Security.Claims;
+
+    using Auth.Domain;
+    using System.Threading;
 
     public class Authenticator
     {
@@ -56,6 +60,8 @@ namespace Auth
 
         public string Authenticate(string name, string pass)
         {
+            string result = string.Empty;
+
             if (this.dataService == null)
             {
                 throw new Exception("Data service has not been initialized");
@@ -66,11 +72,25 @@ namespace Auth
             {
                 if (user.Password.Equals(pass))
                 {
-                    return "User is okay";
+                    result = "User is okay";
                 }
             }
+            else
+            {
+                throw new SecurityException("Invalid user name or password");
+            }
 
-            throw new SecurityException("Invalid user name or password");
+            this.SetupPrincipal(user);
+            return result;
+        }
+
+        private void SetupPrincipal(User user)
+        {
+            var i = new CorpIdentity(user.Name, "admin");
+
+            var id = new ClaimsIdentity(i.Claims, "DemoAuth");
+            var p = new ClaimsPrincipal(id);
+            Thread.CurrentPrincipal = p;
         }
     }
 }

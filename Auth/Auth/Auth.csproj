@@ -49,6 +49,7 @@
     <Compile Include="Authenticator.cs" />
     <Compile Include="Authorizer.cs" />
     <Compile Include="Config\UserConfiguration.cs" />
+    <Compile Include="CorpIdentity.cs" />
     <Compile Include="DataContext.cs" />
     <Compile Include="StubService.cs" />
     <Compile Include="DataService.cs" />

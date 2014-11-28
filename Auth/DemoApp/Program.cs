@@ -12,6 +12,8 @@ namespace DemoApp
         {
             var app = new MainApp();
 
+            app.ShowInfo();
+
             app.AllCanDoThis();
             app.AdminsCanDoThis();
 
