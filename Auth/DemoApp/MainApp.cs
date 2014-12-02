@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IdentityModel.Services;
 using System.Linq;
+using System.Security.Permissions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -29,10 +31,20 @@ namespace DemoApp
             Console.WriteLine(Environment.NewLine);
         }
 
-        public void AdminsCanDoThis()
+        [ClaimsPrincipalPermission(SecurityAction.Demand, Operation = "Read", Resource = "AdminArea")]
+        public void AdminsCanDoThis1()
         {
             Console.WriteLine(Environment.NewLine);
-            Console.WriteLine("Only the person with 'admin' role can invoke this method.");
+            Console.WriteLine("Only the person with 'admin' role can invoke this method (1).");
+            Console.WriteLine(Environment.NewLine);
+        }
+
+        public void AdminsCanDoThis2()
+        {
+            ClaimsPrincipalPermission.CheckAccess("AdminArea", "Read");
+            
+            Console.WriteLine(Environment.NewLine);
+            Console.WriteLine("Only the person with 'admin' role can invoke this method (2).");
             Console.WriteLine(Environment.NewLine);
         }
     }

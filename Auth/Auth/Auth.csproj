@@ -39,6 +39,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.IdentityModel" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -47,7 +48,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Authenticator.cs" />
-    <Compile Include="Authorizer.cs" />
+    <Compile Include="AuthorizationManager.cs" />
+    <Compile Include="ClaimsTransformer.cs" />
     <Compile Include="Config\UserConfiguration.cs" />
     <Compile Include="CorpIdentity.cs" />
     <Compile Include="DataContext.cs" />

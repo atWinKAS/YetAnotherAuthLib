@@ -14,6 +14,7 @@ namespace Auth
         {
             this.AddClaim(new Claim(ClaimTypes.Name, name));
             this.AddClaim(new Claim(ClaimTypes.Role, "admin"));
+            this.AddClaim(new Claim("http://additionalclaims/somenewclaim/", "true"));
         }
 
         public string Name
