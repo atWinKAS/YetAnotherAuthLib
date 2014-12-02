@@ -1,42 +1,81 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿// ***********************************************************************
+// Assembly         : Auth
+// Author           : Andrii Tkach
+// Created          : 02-12-2014
+//
+// ***********************************************************************
+// <copyright file="Authenticator.cs" company="WinKAS A/S">
+//     WinKAS A/S. All rights reserved.
+// </copyright>
+// <summary>
+//    Here we try to implement simple authentication features
+// </summary>
+// ***********************************************************************
 
 namespace Auth
 {
-    using System.ComponentModel.DataAnnotations;
+    using System;
+    using System.Linq;
+
     using System.Security;
     using System.Security.Claims;
 
-    using Auth.Domain;
     using System.Threading;
 
+    using Auth.Domain;
+
+    /// <summary>
+    /// Authentication manager
+    /// </summary>
     public class Authenticator
     {
+        /// <summary>
+        /// The data service
+        /// </summary>
         private IDataService dataService;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Authenticator"/> class.
+        /// </summary>
         public Authenticator()
         {
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Authenticator"/> class.
+        /// </summary>
+        /// <param name="service">The service.</param>
         public Authenticator(IDataService service)
         {
             this.dataService = service;
         }
 
-        public IDataService Service {
+        /// <summary>
+        /// Gets or sets the service.
+        /// </summary>
+        /// <value>
+        /// The service.
+        /// </value>
+        public IDataService Service 
+        {
             get
             {
                 return this.dataService;
             }
+
             set
             {
                 this.dataService = value;
             } 
         }
-        
+
+        /// <summary>
+        /// Users the exists.
+        /// </summary>
+        /// <param name="name">The name.</param>
+        /// <param name="pass">The pass.</param>
+        /// <returns>True if user exists in the data storage</returns>
+        /// <exception cref="System.Exception">Data service has not been initialized</exception>
         public bool UserExists(string name, string pass)
         {
             if (this.dataService == null)
@@ -58,6 +97,14 @@ namespace Auth
             return result;
         }
 
+        /// <summary>
+        /// Authenticates the specified name.
+        /// </summary>
+        /// <param name="name">The name.</param>
+        /// <param name="pass">The pass.</param>
+        /// <returns>Some demo string with authentication result</returns>
+        /// <exception cref="System.Exception">Data service has not been initialized</exception>
+        /// <exception cref="System.Security.SecurityException">Invalid user name or password</exception>
         public string Authenticate(string name, string pass)
         {
             string result = string.Empty;
@@ -84,6 +131,10 @@ namespace Auth
             return result;
         }
 
+        /// <summary>
+        /// Setups the principal.
+        /// </summary>
+        /// <param name="user">The user.</param>
         private void SetupPrincipal(User user)
         {
             var i = new CorpIdentity(user.Name, "admin");

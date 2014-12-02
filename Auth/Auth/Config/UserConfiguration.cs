@@ -1,8 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿// ***********************************************************************
+// Assembly         : Auth
+// Author           : Andrii Tkach
+// Created          : 02-12-2014
+//
+// ***********************************************************************
+// <copyright file="UserConfiguration.cs" company="WinKAS A/S">
+//     WinKAS A/S. All rights reserved.
+// </copyright>
+// <summary>
+//    Entity framework configuration class
+// </summary>
+// ***********************************************************************
 
 namespace Auth.Config
 {
@@ -10,8 +18,14 @@ namespace Auth.Config
 
     using Auth.Domain;
 
+    /// <summary>
+    /// User Configuration
+    /// </summary>
     public class UserConfiguration : EntityTypeConfiguration<User>
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UserConfiguration"/> class.
+        /// </summary>
         public UserConfiguration()
         {
             Property(p => p.Name).HasMaxLength(30).IsRequired();
